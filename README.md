@@ -21,12 +21,12 @@ The solution is comprised of three main parts:
 ### 1. Build State-Space Realization of MMC Dynamics
 - Run `getPlantModel()` function to obtain state-space (ss) matrices `(A,B,C)` corresponding to the continuous time.
 - Run `c2d()` function to discretize the ss.
-- Run `getAugmentedSystem()` function to obtain an augmented ss with an integrator.
+- Run `getAugmentedSystem()` function to obtain an augmented ss with an integrator defined by rated dynamics `\Delta u(k) = u(k)-u(k-1)`.
 
 ---
 
 ### 2. Robust MPC Design via Controller Matching with Vertex Relaxation
-- Run `getRobustK()` function to compute a robust state feedback gain, i.e., an unconstrained control law.
+- Run `getRobustK()` function to compute a robust state feedback gain `K`, i.e., an unconstrained control law.
 - Run `matchingControllerDesignRelax()` function to compute `Q, R, P` by solving LMI from `[ ]`, i.e., controller matching with vertex relaxation.
 - Run `quadprog()` function to compute optimal control input resulting of the RMPC
 
@@ -35,6 +35,7 @@ The solution is comprised of three main parts:
 ### 3. Closed-Loop Simulation
 Tools: **MATLAB / RTDS**
 - Run `simMPCwRealPlant()` function to simulate the closed-loop response comprised of MMC and MPC.
+- Run `simSystemSateFeedBack()` function to simulate the closed-loop response comprised of MMC and robust state feedback gain `K`.
 
 ---
 
@@ -43,4 +44,4 @@ Tools: **MATLAB / RTDS**
 - **Integration:** MATLAB and RTDS for simulation.
 - **Safe-Grid Alignment:** Designed for Safe-Grid project requirements.
 
-``
+
