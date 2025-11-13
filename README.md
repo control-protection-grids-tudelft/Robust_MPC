@@ -1,7 +1,7 @@
 # Robust_MPC
 
 **Date:** 23/10/2025
-**Project:** Safe-Grid
+**Project:** 
 
 
 ---
@@ -11,7 +11,7 @@ This is a repository concerning the development of a **robust model predictive c
 The RMPC is designed using a  tuning method, i.e., **controller matching with vertex relaxation**. 
 Consult [1,2] for reading a detial theoretical description of the method.
 
-> **Note:** This solution relates to the **Safe-Grid Project**.
+> **Note:** This solution relates to the ****.
 
 ---
 
