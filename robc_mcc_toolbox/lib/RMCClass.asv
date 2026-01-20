@@ -1,0 +1,121 @@
+classdef RMCClass
+    %RMCCLASS Summary of this class goes here
+    %   Detailed explanation goes here
+    
+    properties
+        % State-space realization
+        A               % [nxn] state matrix
+        B               % [nxm] input matrix
+        C               % [pxn] output matrix
+        D       
+        E
+        % Dimensions 
+        nx
+        nu
+        ny
+        nw
+        % Compound systems
+        ABsys           % [cell] N x {A,B} cell array containing (A,B)
+        % Constraints
+        Xbound          % [xmax, xmin]
+        Ubound          % [umax, umin]    
+        % Static gains
+        K               % [mxn] static feedback controller
+        P               % [nxn] domain of attraction (DOA)
+        % Methods
+        methodControl   % [string]
+    end
+    
+    methods
+        function obj = RMCClass(A,B,C,D,E,Xbound,Ubound)
+            %RMCCLASS Construct an instance of this class
+            %  RMCClass main properties are the state-space realization
+            %  matrices (A,B,C,D,E), bounds of the constraint and inputs  
+            %  (Xbound,Ubound) and  the prediction horizon (N).
+
+            obj.ABsys = [];
+            
+            nx = size(A,1);
+            nu = size(B,2);
+
+            if isempty(C)==true
+                C = eye(nx);
+            end
+
+            ny = size(C,1);
+            if isempty(D)==true
+                D = zeros(ny,nu);            
+            end
+
+            if isempty(E)==true
+                E = zeros(nx,1); 
+            end
+
+            nw = size(E,2);
+            
+            obj.A = A;
+            obj.B = B;
+            obj.C = C;
+            obj.D = D;
+            obj.E = E;
+            obj.Xbound = Xbound;   
+            obj.Ubound = Ubound;
+            obj.nu = nu;
+            obj.nx = nx;
+            obj.ny = ny;
+            obj.nw = nw;
+        end
+        
+        function [ABsys] = getCompSystem(obj,PAvec,PBvec)
+            % getCompSystem(A0,B0,pvec) were Alpv are handling
+            % functions 
+            npa = size(PAvec,2);
+            npb = size(PBvec,2);
+            neq = max(npa,npb);
+
+            if size(PAvec,1)<size(obj.A,1)*size(obj.A,2)
+                warning('There is a dimension error dim(PAvec) >=nx^2.')
+            end 
+
+            if size(PBvec,1)<size(obj.B,1)*size(obj.B,2)
+                warning('There is a dimension error dim(PAvec) >=nx x nu.')
+            end 
+            
+            ABsys = cell(neq+1,2);
+            ABsys{1,1} = obj.A; ABsys{1,2} = obj.B;
+            for i=1:neq
+                if i<=npa
+                    ABsys{i+1,1} = obj.A + ...
+                                reshape(PAvec(:,1),obj.nx,obj.nx)';
+                else
+                end
+                if i<=npb
+                else
+                end
+            end
+
+        end
+        function [K,P] = synthClassic()
+            % synthClassic() 
+        end
+        function [K,P] = synthClassicRobust()
+            % synthClassicRobust() 
+        end
+        function [K,P] = synthConstraintRobust()
+            % synthClassicRobust() 
+        end
+        function [K,P,miu] = synthDKIter()
+        end
+        function [K,P]=synthOptRobust(obj,E1,E2,D1)
+            % cite [Ayari, 2017] Multivariable Optimal Robust Control 
+            % Strategy for MMC Converter 
+            X = sdpvar();
+            Z = sdpvar();
+            Y = sdpvar();
+            alph = sdpvar(1);
+            varep = sdpvar(1);
+
+        end
+    end
+end
+
