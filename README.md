@@ -7,9 +7,11 @@
 ---
 
 ## Overview
-This is a repository concerning the development of a **robust model predictive control (RMPC)** solution to control output current of **modular multilevel converter (MMCs)** used in **high voltage direct current (HVDC)** transmission.
-The RMPC is designed using a  tuning method, i.e., **controller matching with vertex relaxation**. 
-Consult [1,2] for reading a detial theoretical description of the method.
+This repository provides a collection of toolboxes for **modeling, analysis, and controller synthesis** of modular multilevel converter (**MMC**)–based multi-terminal direct current (**MTDC**) power systems.
+
+The toolboxes are developed in **MATLAB and Julia**, and the resulting control solutions can be deployed in RTDS-based hardware-in-the-loop (HIL) simulations. Controller synthesis primarily relies on **robust control techniques**, with a focus on ensuring stability and performance under modeling uncertainties and disturbances.
+
+The implemented system models mainly capture the average-value dynamics of MMCs formulated in the dqz reference frame, enabling efficient analysis and controller design for large-scale MTDC systems.
 
 > **Note:** This solution relates to the ****.
 
