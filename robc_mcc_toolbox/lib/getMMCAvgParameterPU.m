@@ -23,7 +23,7 @@ switch headString
         
         % Per-unit values of equivalent arm resistance, inductance and 
         % capacitance 
-        Rr = 0.157/Z2ACbase;            % [p.u]
+        Rr = 0.15/Z2ACbase;            % [p.u]
         Lr = 0.05*wbase/(Z2ACbase);     % [p.u]
         
         % Per-unit values of equivalent transformer resistance and 
@@ -48,13 +48,13 @@ switch headString
         
         % Per-unit values of equivalent arm resistance, inductance and 
         % capacitance 
-        Rr = 0.157/Z2ACbase;           % [p.u]
-        Lr = 0.1*wbase/(Z2ACbase);     % [p.u]
+        Rr = 0.15/Z2ACbase;           % [p.u]
+        Lr = 0.05*wbase/(Z2ACbase);     % [p.u]
         
         % Per-unit values of equivalent transformer resistance and 
         % inductance 
         Rac = 0.006;            % [p.u]
-        Lac = 0.15;             % [p.u]   
+        Lac = 0.18;             % [p.u]   
 
     case 'CIGRE_B457_DCS1_Onshore'
         % CIGRE DCS1 2GW Onshore MMC Parameters

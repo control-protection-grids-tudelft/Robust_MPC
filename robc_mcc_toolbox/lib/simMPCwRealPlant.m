@@ -47,7 +47,7 @@ if nargin==14
 end
 
 [ Phi, Gamma ] = ABN2PhiGamma(A,B,N);
-[ Psi, Omega ] = QRPN2PsiOmega(Q,R,P,N );
+[ Psi, Omega ] = QRPN2PsiOmega(Q,R,P,N ); 
 [Mcal,b] = getMb(umax,umin,N); 
 
 if augHead == false
