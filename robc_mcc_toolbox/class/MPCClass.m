@@ -12,8 +12,8 @@ classdef MPCClass
         D       
         E
         % Constraints
-        Xbound          % [xmax, xmin]
-        Ubound          % [umax, umin]    
+        Xbound          % [xmin, xmax]
+        Ubound          % [umin, umax]    
         Pvec            % [nmx1]  scheduling variable vector
         % Compact prediction model
         Phi             % [Nnxn]    state dependent matrix
@@ -25,6 +25,7 @@ classdef MPCClass
         P               % [nxn]
         Psi             % [NmxNm]
         Omega           % [NnxNn]
+        PsiZ            % [NmxNm]
         % Terminal ingridients (Matching controller)
         XTerminal       % Yalmip set (pending)
         K               % Matching controller (Terminal controller)
@@ -37,14 +38,27 @@ classdef MPCClass
         c               % [] vector 
         M               % [] matrix
         b               % [] vector
+        Axu             % [] matrix
+        Mx              % [] matrix
+        bx              % [] vector
+        Ayu             % [] matrix
+        My              % [] matrix
+        by              % [] vector
+        Au              % [] matrix
+        bu              % [] vector
+        Adu             % [] matrix
+        bdu             % [] vector
+        Aiu             % [] matrix
+        biu             % [] vector
         % MPC properties
         methodT         % [string] Tuning method: 'classic', 'const', 'rob'
         methodC         % [string] Constraint method: 'sti', 'stdi','in'
-        methodO         % [string] Optimization method        
+        methodO         % [string] Optimization method 
+        MPCType         % [string] MPC Type: 'classic', 'input_rate'
     end
     
     methods
-        function obj = MPCClass(A,B,C,Pvec,Xbound,Ubound,N,Q,R)
+        function obj = MPCClass(A,B,C,Pvec,Xbound,Ubound,N,Q,R,MPCType)
             %MPCCLASS Construct an instance of this class
             %  MPCClass main properties are the state-space realization
             %  matrices (A,B,C), bounds of the constraint and inputs  
@@ -58,6 +72,11 @@ classdef MPCClass
             obj.N = N; 
             obj.Q = Q;
             obj.R = R;
+            if nargin==10
+               obj.MPCType = MPCType;
+            else
+               obj.MPCType = 'classic';
+            end
         end
         
         function obj = createOCP(obj,sigma,methodT,methodC,methodO)
@@ -83,22 +102,70 @@ classdef MPCClass
             end
 
             [obj.Psi,obj.Omega] = QRPN2PsiOmega(obj.Q,obj.R,obj.P,obj.N);
-
-            obj.G = 2*(obj.Psi+obj.Gamma'*obj.Omega*obj.Gamma);
-            obj.F = 2*obj.Gamma'*obj.Omega*obj.Phi;
-
+            
+            switch obj.MPCType
+                case 'classic'
+                    obj.G = 2*(obj.Psi+obj.Gamma'*obj.Omega*obj.Gamma);
+                    obj.F = 2*obj.Gamma'*obj.Omega*obj.Phi;
+                    obj.PsiZ = obj.Psi*0;
+                case 'input_rate'
+                    % PsiZ = zeros(size(obj.Psi));                    
+                    Z = zeros(obj.N,obj.N);
+                    for i=1:obj.N
+                        for j=1:obj.N
+                            % Diagonal term
+                            if j==i 
+                                Z(i,j)=1;
+                            end
+                            % Off Diagonal term
+                            if j==i-1
+                                 Z(i,j)=-1;
+                            end
+                        end
+                    end
+                    obj.PsiZ = kron(Z,eye(size(obj.B,2)));
+                    obj.G = 2*(obj.PsiZ'*obj.Psi*obj.PsiZ+...
+                                obj.Gamma'*obj.Omega*obj.Gamma);
+                    obj.F = 2*obj.Gamma'*obj.Omega*obj.Phi;
+                otherwise
+                    obj.G = 2*(obj.Psi+obj.Gamma'*obj.Omega*obj.Gamma);
+                    obj.F = 2*obj.Gamma'*obj.Omega*obj.Phi;
+            end
+            
+            % Creating constraint matrices!
             [obj.W,obj.L,obj.c] = getWLc(obj.A,obj.B,...
-                                        obj.Xbound(:,1),obj.Xbound(:,2),...
-                                        obj.Ubound(:,1),obj.Ubound(:,2),...
+                                        obj.Xbound(:,2),obj.Xbound(:,1),...
+                                        obj.Ubound(:,2),obj.Ubound(:,1),...
                                         obj.Gamma, obj.Phi);
-            [obj.M, obj.b] = getMb(obj.Ubound(:,1),obj.Ubound(:,2),...
+
+            [obj.M, obj.b] = getMb(obj.Ubound(:,2),obj.Ubound(:,1),...
                                     obj.N);
+
+            [obj.Ayu,obj.by,obj.My]=getAYby(obj.Gamma,obj.Phi,obj.C,...
+                                            obj.N,...
+                                            obj.Xbound(:,2),...
+                                            obj.Xbound(:,1));
+
+            [obj.Axu,obj.bx,obj.Mx]=getAXbx(obj.Gamma,obj.Phi,...
+                                            obj.N,...
+                                            obj.Xbound(:,2),...
+                                            obj.Xbound(:,1));
+
+            [obj.Au,obj.bu]=getAUbu(obj.N,...
+                                    obj.Ubound(:,2),obj.Ubound(:,1));
+
+            [obj.Adu,obj.bdu]=getAdUbdu(obj.N,...
+                                        obj.Ubound(:,2),obj.Ubound(:,1));
+
+            [obj.Aiu,obj.biu]=getAiUbiu(obj.N,...
+                                        obj.Ubound(:,2),obj.Ubound(:,1));
         end
 
         function u_qp = solveOneQP(obj,x0,u0)
             % Solve a QP problem
             invG = inv(obj.G);
             nu = length(u0);
+            uss = [u0;zeros((obj.N-1)*nu,1)];
             switch obj.methodC
                 case 'sti'
                     MConst = obj.L;
@@ -117,11 +184,11 @@ classdef MPCClass
                 case 'Hildreth'
                     max_iter = 38;
                     tol = 1e-6;
-                    u_qp = QPHildClassic(invG, obj.F*x0, ...
+                    u_qp = QPHildClassic(invG, obj.F*x0-2*obj.PsiZ*uss, ...
                         MConst,bConst,max_iter, tol);
                 case 'Quadprog'
                     options_qp = [];
-                    [u_qp,~,exitflag] = quadprog(obj.G,obj.F*x0,...
+                    [u_qp,~,exitflag] = quadprog(obj.G,obj.F*x0-2*obj.PsiZ*uss,...
                                                     MConst,bConst,...
                                                     [],[],[],[],[],...
                                                     options_qp);
@@ -129,10 +196,10 @@ classdef MPCClass
                         warning('exitflag quadprog =%d\n', exitflag)
                         if exitflag == -2
                             warning('Optimization problem is infeasible.\n')
-                            u_qp = -invG*obj.F*x0;
+                            u_qp = -invG*(obj.F*x0-2*obj.PsiZ*uss);
                         else
                             warning('Something weird happend. \n')
-                            u_qp = -invG*obj.F*x0;
+                            u_qp = -invG*obj.F*(obj.F*x0-2*obj.PsiZ*uss);
                         end
                     end
             end
