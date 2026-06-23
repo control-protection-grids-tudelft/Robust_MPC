@@ -34,7 +34,7 @@ switch nargin
             % AC side equivalent parameters
             R_ac_eq = Rr + Rarm/2;
             L_ac_eq = Lr + Larm/2;
-        
+            
             % Continuous-time state-space model
             A = [-R_ac_eq/L_ac_eq, -w; w, -R_ac_eq/L_ac_eq];
             B = -[1/L_ac_eq, 0; 0, 1/L_ac_eq];
@@ -49,6 +49,8 @@ switch nargin
             A = -Rarm/Larm;
             B = -1/Larm;
             C = 1;
+        elseif type=="UL"
+            % To be done
         else
             warning('The default type model, i.e., OCC, is used.')
             % AC side equivalent parameters
@@ -65,4 +67,5 @@ switch nargin
 end
 % Provisiona line to match Rahul's model 16-11-2025.
 B =-B;
+% warning('I changed line 70 to fix generate Sunny data. Needs to be changed to B=-B.')
 end

@@ -1,5 +1,8 @@
 function Ck = CN2Ck(C,N)
-% Ck = CN2Ck(C,N)
+% Ck = CN2Ck(C,N) function to compound C matrices.
+% ------------------------------------
+% Author: Victor Daniel Reyes Dreke
+% ------------------------------------
 
 ny = size(C,1);
 nx = size(C,2);

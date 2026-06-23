@@ -81,7 +81,7 @@ if methodF == "classic"
 end
 
 L1 = [];
-tolVal = 1e-6; 
+tolVal = 1e-8; 
 
 if (methodF=="robust" ||  methodF=="constrained")&& vj >= 2
     for i=2:vj+1
@@ -185,6 +185,7 @@ if solverF=="MOSEK"
     options = sdpsettings('solver','mosek','verbose',0);
     if  methodF=="constrained"
         diagnostics = optimize(constraints, -geomean(Z_i),options);
+        % diagnostics = optimize(constraints, [],options); warning('Modified Line 188. Action needed it.')
     elseif  methodF=="robust"
         diagnostics = optimize(constraints, [],options);
     else

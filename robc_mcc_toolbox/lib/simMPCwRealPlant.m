@@ -48,7 +48,7 @@ end
 
 [ Phi, Gamma ] = ABN2PhiGamma(A,B,N);
 [ Psi, Omega ] = QRPN2PsiOmega(Q,R,P,N ); 
-[Mcal,b] = getMb(umax,umin,N); 
+[Mcal,b] = getMb(umax*4.4,umin*4.4,N); warning('Line 51 is modified');
 
 if augHead == false
     Mcal = Mcal*0;

@@ -14,7 +14,7 @@ function [ Phi, Gamma ] = ABN2PhiGamma(A,B,N)
 % Phi   ->      [matrix] state prediction matrix 
 % Gamma ->      [matrix] input prediction matrix
 % ---------------------------------------------------------------------- %
-% Authors: (i) Duo Xu.
+% Authors: (i) Dr. Duo Xu.
 % ---------------------------------------------------------------------- %
 % References:
 % ---------------------------------------------------------------------- %

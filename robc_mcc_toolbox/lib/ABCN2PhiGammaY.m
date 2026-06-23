@@ -1,6 +1,18 @@
 function [PhiY, GammaY] = ABCN2PhiGammaY(A,B,C,N)
-%ABN2PhiGamma Summary of this function goes here
-%   Detailed explanation goes here
+% [PhiY, GammaY] = ABCN2PhiGammaY(A,B,C,N) function to compute output-input 
+% compact prediction model of LTI state-space models, such that 
+% Y= PhiY*x(k)+ GammaY Uk, see [1]. 
+% -----------------------------------
+% Inputs:   - (A,B,C) are the state-space matrices (standard notation)
+%           - N is the prediction horizon.
+% Outputs:  - (PhiY, GammaY) are the prediction matrices.
+% ------------------------------------
+% Author: Victor Daniel Reyes Dreke
+% ------------------------------------
+% References: 
+% [1] Wang, L. (2009). Model predictive control system design and 
+% implementation using MATLAB®. London: Springer London.
+% ------------------------------------
 
 nx = size(B,1);
 nu = size(B,2);
