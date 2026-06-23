@@ -1,0 +1,7 @@
+-I"C:/Users/vreyesdreke/OneDrive - Delft University of Technology/Documents/MATLAB/!Projects/robc_mmc_tool/modl"
+-I"C:/Users/vreyesdreke/OneDrive - Delft University of Technology/Documents/MATLAB/!Projects/robc_mmc_tool/modl/sfbg_lqr_occ__ert_rtw"
+-I"C:/Program Files/MATLAB/R2024b/extern/include"
+-I"C:/Program Files/MATLAB/R2024b/simulink/include"
+-I"C:/Program Files/MATLAB/R2024b/rtw/c/src"
+-I"C:/Program Files/MATLAB/R2024b/rtw/c/src/ext_mode/common"
+-I"C:/Program Files/MATLAB/R2024b/rtw/c/ert"
