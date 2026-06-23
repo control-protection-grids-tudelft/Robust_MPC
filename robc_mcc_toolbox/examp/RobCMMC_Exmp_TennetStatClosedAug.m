@@ -47,14 +47,14 @@ end
 
 % Polytopic state and input constraints
 Xbound = [-1*ones(nx,1), 1*ones(nx,1)]*2;         % [Xmin, Xmax] 
-Ubound = [-1*ones(nu,1), 1*ones(nu,1)]*4;         % [Umin, Umax]  
+Ubound = [-1*ones(nu,1), 1*ones(nu,1)]*0.5;         % [Umin, Umax]  
 
 Pvec = [4e-2, 6e-2, 6e-2, 4e-2, zeros(1,4)];    % Pvec = [1 x nxm]
 
 %%                     Controller Design sections                       %%
 % Controller design
 % Case 1: LQR 
-Q = 1e4*eye(nx); R =1e-2*eye(nu);
+Q = 1e2*eye(nx); R =1e-2*eye(nu);
 [K_LQR, P_LQR,~] = dlqr(A_on,B_on,Q,R);
 % Case 2: Robust
 [K_Robust,P_Robust]=getRobustK(A_on,B_on,[],Pvec,Xbound,Ubound,"robust");
@@ -86,15 +86,16 @@ Fig_poles_open = plotAugFullInformationOpen(MMC_ONSHORE,prv,Tsim,x0,xss);
 %     'BackgroundColor','none','ContentType','vector')
 
 % Closed-loop
-Tsim =0.4e3;
+kn = 1e4;
+Tsim =0.4*kn;
 % x0 = [0.67; -1e-4];
 
 x0 = zeros(nx,1);
 xss = [zeros(2,Tsim+1); 
-       zeros(1,0.05e3), 0.5*ones(1,0.3e3), 0.5*ones(1,0.05e3+1); ...
-       zeros(1,0.05e3), 0.0*ones(1,0.3e3), -0.1*ones(1,0.05e3+1)]; 
+       zeros(1,0.05*kn), 0.5*ones(1,0.3*kn), 0.5*ones(1,0.05*kn+1); ...
+       zeros(1,0.05*kn), 0.0*ones(1,0.3*kn), -0.1*ones(1,0.05*kn+1)]; 
 nd = 1;
-w = [zeros(nx,0.2e3-nd), 0.04*ones(nx,nd), zeros(nx,0.2e3+1)];
+w = [zeros(nx,0.2*kn-nd), 0.04*ones(nx,nd), zeros(nx,0.2*kn+1)];
 
 Fig_K_LQR=plotAugFullInformationClosed(MMC_ONSHORE,-K_LQR,prv,...
                                             Tsim,x0,xss,w);

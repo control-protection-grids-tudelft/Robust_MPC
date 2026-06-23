@@ -97,8 +97,8 @@ legendHead = {'Optimal','Constraint'};
 Pcell = {P_Opt;P_Const};
 Fig_DOA = plotDOAsv2(Pcell,legendHead);
 
-exportgraphics(gcf,'paper_plotDOAsv2.emf',...
-    'BackgroundColor','none','ContentType','vector')
+% exportgraphics(gcf,'paper_plotDOAsv2.emf',...
+%     'BackgroundColor','none','ContentType','vector')
 
 
 % =======================

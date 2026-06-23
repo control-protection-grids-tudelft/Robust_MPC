@@ -19,8 +19,8 @@ B_on = SYS_On_DISC.B;
 C_on = SYS_On_DISC.C;
 
 % Polytopic state and input constraints
-Xbound = [[-1; -1], [1; 1]]*10;                  % [Xmin, Xmax] 
-Ubound = [[-1; -1], [1; 1]]*2;                   % [Umin, Umax]  
+Xbound = [[-1; -1], [1; 1]]*1;                  % [Xmin, Xmax] 
+Ubound = [[-1; -1], [1; 1]]*0.2;                   % [Umin, Umax]  
 
 % Model uncertaint coefficient
 NModel =  100;                    % Number of cases
@@ -85,7 +85,7 @@ x0 = 10*ones(size(Ac_on,1),1);
 % Q = eye(size(Ac_on,1));
 % R = eye(size(Bc_on,2));
 
-Q = 1e4*eye(size(Ac_on,1)); R =1e-3*eye(size(Bc_on,2));
+Q = 1e4*eye(size(Ac_on,1)); R =1e-4*eye(size(Bc_on,2));
 % Uncertain re-definition
 
 pvec = [reshape(PAcVec',1,nra), 0*reshape(PBcVec',1,nrb)];
@@ -110,9 +110,9 @@ xss = [zeros(1,t1*1e3), 0.5*ones(1,t2*1e3), 0.5*ones(1,t1*1e3+1); ...
 nd = 1;
 w = [zeros(2,t3*1e3-nd), 0.04*ones(2,nd), zeros(2,t3*1e3+1)];
 
-Nk = 100;
+Nk = 200;
 
-PSimvec = ((rand(nra+nrb,Nk)-0.5)/0.5).*Pvec';
+PSimvec = ((rand(nra+nrb,Nk)-0.5)/0.52).*Pvec';
 % [zeros(1,Nk); 
 %         (rand(1,Nk)-0.5)*(0.02/0.5); 
 %         zeros(1,Nk); 
