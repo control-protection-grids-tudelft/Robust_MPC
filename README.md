@@ -7,13 +7,22 @@
 ---
 
 ## Overview
-This repository provides a collection of toolboxes for **modeling, analysis, and controller synthesis** of modular multilevel converter (**MMC**)–based multi-terminal direct current (**MTDC**) power systems.
 
-The toolboxes are developed in **MATLAB and Julia**, and the resulting control solutions can be deployed in RTDS-based hardware-in-the-loop (HIL) simulations. Controller synthesis primarily relies on **robust control techniques**, with a focus on ensuring stability and performance under modeling uncertainties and disturbances.
+This repository contains a collection of functions for the modeling, analysis, and control of Modular Multilevel Converters (MMCs) and Multi-Terminal Direct Current (MTDC) transmission systems.
 
-The implemented system models mainly capture the average-value dynamics of MMCs formulated in the dqz reference frame, enabling efficient analysis and controller design for large-scale MTDC systems.
+The main contribution of this repository is a framework for the commissioning and validation of robust state-feedback controllers [1] and model predictive controllers (MPCs) [2] for MMC-based MTDC systems. In addition, it includes well-established methods for stability analysis and robust state-feedback control design.
 
-> **Note:** This solution relates to the ****.
+The presented solutions have been developed in MATLAB and Julia. The resulting controllers can be deployed on RTDS platforms using CBuilder blocks.
+
+## References
+
+[1] V. Reyes Dreke and M. A. M. Cheah-Mane, *"Robust Current Regulation of MMC-based MTDC Power Systems based on Lyapunov Inequality."*
+
+[2] V. Reyes Dreke and M. A. M. Cheah-Mane, *"Robust Tuning of Model Predictive Control for MMC-Based High-Voltage Power Systems."*
+
+## Funding
+
+This work is supported by the Horizon Europe project **PROSECCO** (Grant Agreement No. 101160687) and the **NWO Veni** project **SAFE-GRID** (Project No. 20248)
 
 ---
 
