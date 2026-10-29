@@ -26,6 +26,25 @@ This work is supported by the Horizon Europe project **PROSECCO** (Grant Agreeme
 
 ---
 
+## Installation
+
+1. Install MATLAB, Control System Toolbox and Mosek.
+2. Download the code. With Git:
+
+   ```bash
+   git clone https://github.com/[TO ADD: organisation]/[TO ADD: repository].git
+   cd [TO ADD: repository]
+   ```
+
+   Or use the green **Code → Download ZIP** button at the top of this page.
+
+3. **MATLAB:** open MATLAB in the repository folder and run:
+
+   ```matlab
+   cd matlab
+   rboc_mmc_install   % adds the project folders to the MATLAB path
+   ``
+
 ## Structure
 The solution is comprised of three main parts:
 
