@@ -1,7 +1,8 @@
 % RobCMMC Toolbox
-addpath lib\
 addpath class\
 addpath data\
-addpath examp\  
-addpath plot_fig\
+addpath examples\  
 addpath modl\data_smk_\
+
+mkdir('lib\')
+addpath(genpath('lib\')) 
