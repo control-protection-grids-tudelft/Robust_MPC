@@ -1,4 +1,4 @@
-# Robust_MPC
+# Robust MPC
 
 **Date:** 23/10/2025
 
