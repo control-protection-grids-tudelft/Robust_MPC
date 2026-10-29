@@ -1,7 +1,6 @@
 # Robust_MPC
 
 **Date:** 23/10/2025
-**Project:** 
 
 
 ---
