@@ -3,7 +3,6 @@
 **Date:** 23/10/2025
 
 
----
 
 ## Overview
 
@@ -12,16 +11,6 @@ This repository contains a collection of functions for the modeling, analysis, a
 The main contribution of this repository is a framework for the commissioning and validation of robust state-feedback controllers [1] and model predictive controllers (MPCs) [2] for MMC-based MTDC systems. In addition, it includes well-established methods for stability analysis and robust state-feedback control design.
 
 The presented solutions have been developed in MATLAB and Julia. The resulting controllers can be deployed on RTDS platforms using CBuilder blocks.
-
-## References
-
-[1] V. Reyes Dreke and M. A. M. Cheah-Mane, *"Robust Current Regulation of MMC-based MTDC Power Systems based on Lyapunov Inequality."*
-
-[2] V. Reyes Dreke and M. A. M. Cheah-Mane, *"Robust Tuning of Model Predictive Control for MMC-Based High-Voltage Power Systems."*
-
-## Funding
-
-This work is supported by the Horizon Europe project **PROSECCO** (Grant Agreement No. 101160687) and the **NWO Veni** project **SAFE-GRID** (Project No. 20248)
 
 ---
 
@@ -33,14 +22,12 @@ The solution is comprised of three main parts:
 - Run `c2d()` function to discretize the ss.
 - Run `getAugmentedSystem()` function to obtain an augmented ss with an integrator defined by rated dynamics `\Delta u(k) = u(k)-u(k-1)`.
 
----
 
 ### 2. Robust MPC Design via Controller Matching with Vertex Relaxation
 - Run `getRobustK()` function to compute a robust state feedback gain `K`, i.e., an unconstrained control law.
 - Run `matchingControllerDesignRelax()` function to compute `Q, R, P` by solving LMI from `[ ]`, i.e., controller matching with vertex relaxation.
 - Run `quadprog()` function to compute optimal control input resulting of the RMPC
 
----
 
 ### 3. Closed-Loop Simulation
 Tools: **MATLAB / RTDS**
@@ -52,6 +39,17 @@ Tools: **MATLAB / RTDS**
 ## Highlights
 - **Robustness:** Handles HVDC dynamics uncertainties and faults.
 - **Integration:** MATLAB and RTDS for simulation.
-- **Safe-Grid Alignment:** Designed for Safe-Grid project requirements.
+- **SAFE-GRID Alignment:** Designed for SAFE-GRID project requirements.
+
+---
+## References
+
+[1] V. Reyes Dreke, R. Rane and A. Lekić, *"Robust Current Regulation of MMC-based MTDC Power Systems based on Lyapunov Inequality,"* 2026 International Conference on Smart Energy Systems and Technologies (SEST), 2026.
+
+[2] V. Reyes Dreke, R. Rane and A. Lekić, *"Robust Tuning of Model Predictive Control for MMC-Based High-Voltage Power Systems,"* arxiv, 2026.
+
+## Funding
+
+This work is supported by the Horizon Europe project **PROSECCO** (Grant Agreement No. 101160687) and the **NWO Veni** project **SAFE-GRID** (Project No. 20248)
 
 
