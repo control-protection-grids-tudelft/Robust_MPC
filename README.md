@@ -16,9 +16,9 @@ The presented solutions have been developed in MATLAB and Julia. The resulting c
 
 ## References
 
-[1] V. Reyes Dreke and M. A. M. Cheah-Mane, *"Robust Current Regulation of MMC-based MTDC Power Systems based on Lyapunov Inequality."*
+[1] V.D. Reyes Dreke, R Rane, and A Lekić, *"Robust Current Regulation of MMC-based MTDC Power Systems based on Lyapunov Inequality."*
 
-[2] V. Reyes Dreke and M. A. M. Cheah-Mane, *"Robust Tuning of Model Predictive Control for MMC-Based High-Voltage Power Systems."*
+[2] V.D. Reyes Dreke, R Rane, and A Lekić, *"Robust Tuning of Model Predictive Control for MMC-Based High-Voltage Power Systems."*
 
 ## Funding
 
