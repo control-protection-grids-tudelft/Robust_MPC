@@ -36,6 +36,34 @@ Tools: **MATLAB / RTDS**
 
 ---
 
+## Installation
+
+1. Install  MATLAB.
+2. Download the code. With Git:
+
+   ```bash
+   git clone https://github.com/[TO ADD: organisation]/[TO ADD: repository].git
+   cd [TO ADD: repository]
+   ```
+
+   Or use the green **Code → Download ZIP** button at the top of this page.
+
+3. **MATLAB:** open MATLAB in the repository folder and run:
+
+   ```matlab
+   cd matlab
+   rboc_mmc_install   % adds the project folders to the MATLAB path
+   ```
+
+### Your first simulation
+
+
+**MATLAB:**
+
+```matlab
+run('examples/my_first_example.m')
+```
+---
 ## Highlights
 - **Robustness:** Handles HVDC dynamics uncertainties and faults.
 - **Integration:** MATLAB and RTDS for simulation.
