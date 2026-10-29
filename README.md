@@ -12,7 +12,7 @@ This repository contains a collection of functions for the modeling, analysis, a
 
 The main contribution of this repository is a framework for the commissioning and validation of robust state-feedback controllers [1] and model predictive controllers (MPCs) [2] for MMC-based MTDC systems. In addition, it includes well-established methods for stability analysis and robust state-feedback control design.
 
-The presented solutions have been developed in MATLAB and Julia. The resulting controllers can be deployed on RTDS platforms using CBuilder blocks.
+The presented solutions have been developed in MATLAB. The resulting controllers can be deployed on RTDS platforms using CBuilder blocks.
 
 ## References
 
