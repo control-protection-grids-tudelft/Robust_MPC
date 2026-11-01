@@ -38,7 +38,7 @@ Tools: **MATLAB / RTDS**
 
 ## Installation
 
-1. Install  MATLAB and MOSEK Solver [here](https://www.mosek.com/downloads/).
+1. Install  MATLAB, YALMIP toolbox [here](https://yalmip.github.io/download/) and MOSEK Solver [here](https://www.mosek.com/downloads/).
 2. Download the code. With Git:
 
    ```bash
@@ -55,6 +55,8 @@ Tools: **MATLAB / RTDS**
    rboc_mmc_install   % adds the project folders to the MATLAB path
    ```
 
+   **Disclaimer:** In case of lack of access to MOSEK solver, modify the variable opts to use solver of compatible with YALMIP of your preference.
+
 ### Your first simulation
 
 
@@ -65,7 +67,7 @@ run('examples/my_first_example.m')
 ```
 ---
 ## Highlights
-- **Robustness:** Handles HVDC dynamics uncertainties and faults.
+- **Robustness:** Handles HVDC dynamics (parametric) uncertainties and faults.
 - **Integration:** MATLAB and RTDS for simulation.
 - **SAFE-GRID Alignment:** Designed for SAFE-GRID project requirements.
 
