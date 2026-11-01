@@ -22,15 +22,18 @@ The solution is comprised of three main parts:
 - Run `c2d()` function to discretize the ss.
 - Run `getAugmentedSystem()` function to obtain an augmented ss with an integrator defined by rated dynamics `\Delta u(k) = u(k)-u(k-1)`.
 
+### 2. Build hyperbox containing uncertainty, state and input sets
+- Run `fineGrid2D()` function to generate a fine grid with a set of uncertain parameters.
+- Run `hyperboxVertices()` function to generate all vertices of the hyperbox given its extrem values.
 
-### 2. Robust MPC Design via Controller Matching with Vertex Relaxation
+### 3. Robust MPC Design via Controller Matching with Vertex Relaxation
 - Run `getRobustK()` function to compute a robust state feedback gain `K`, i.e., an unconstrained control law.
-- Run `matchingControllerDesignRelax()` function to compute `Q, R, P` by solving LMI from `[ ]`, i.e., controller matching with vertex relaxation.
+- Run `matchingControlMPC()` function to compute `Q, R, P` by solving LMI from `[ ]`, i.e., controller matching with vertex relaxation.
 - Run `quadprog()` function to compute optimal control input resulting of the RMPC
 
 
-### 3. Closed-Loop Simulation
-Tools: **MATLAB / RTDS**
+### 4. Closed-Loop Simulation
+Tools: **MATLAB**
 - Run `simMPCwRealPlant()` function to simulate the closed-loop response comprised of MMC and MPC.
 - Run `simSystemSateFeedBack()` function to simulate the closed-loop response comprised of MMC and robust state feedback gain `K`.
 
@@ -40,7 +43,7 @@ Tools: **MATLAB / RTDS**
 
 1. Install  MATLAB, YALMIP toolbox [here](https://yalmip.github.io/download/) and MOSEK Solver [here](https://www.mosek.com/downloads/).
 
-   **Disclaimer:** The results presented in this repository have only been validated using the MOSEK solver. However, the use of these solutions is not limited to MOSEK. If you do not have access to the MOSEK solver, the code in this repository can still be used by modifying the opts variable to select another YALMIP-compatible solver of your choice.
+   **Disclaimer:** The results presented in this repository have only been validated using the MOSEK solver. However, the use of these solutions is not limited to MOSEK. If you do not have access to the MOSEK solver, the code in this repository can still be used by modifying the `opt` variable to select another YALMIP-compatible solver of your choice.
    
 2. Download the code. With Git:
 
