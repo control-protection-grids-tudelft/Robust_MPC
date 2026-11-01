@@ -39,6 +39,9 @@ Tools: **MATLAB / RTDS**
 ## Installation
 
 1. Install  MATLAB, YALMIP toolbox [here](https://yalmip.github.io/download/) and MOSEK Solver [here](https://www.mosek.com/downloads/).
+
+   **Disclaimer:** The results presented in this repository have only been validated using the MOSEK solver. However, the use of these solutions is not limited to MOSEK. If you do not have access to the MOSEK solver, the code in this repository can still be used by modifying the opts variable to select another YALMIP-compatible solver of your choice.
+   
 2. Download the code. With Git:
 
    ```bash
@@ -55,7 +58,6 @@ Tools: **MATLAB / RTDS**
    rboc_mmc_install   % adds the project folders to the MATLAB path
    ```
 
-   **Disclaimer:** In case of lack of access to MOSEK solver, modify the variable opts to use solver of compatible with YALMIP of your preference.
 
 ### Your first simulation
 
