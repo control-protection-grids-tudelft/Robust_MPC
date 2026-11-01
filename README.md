@@ -38,7 +38,7 @@ Tools: **MATLAB / RTDS**
 
 ## Installation
 
-1. Install  MATLAB.
+1. Install  MATLAB and MOSEK Solver [here](https://www.mosek.com/downloads/).
 2. Download the code. With Git:
 
    ```bash
