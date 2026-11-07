@@ -57,7 +57,7 @@ Tools: **MATLAB**
 3. **MATLAB:** open MATLAB in the repository folder and run:
 
    ```matlab
-   cd matlab
+   cd robc_mcc_toolbox
    rboc_mmc_install   % adds the project folders to the MATLAB path
    ```
 
