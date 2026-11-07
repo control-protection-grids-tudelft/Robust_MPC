@@ -48,8 +48,8 @@ Tools: **MATLAB**
 2. Download the code. With Git:
 
    ```bash
-   git clone https://github.com/[TO ADD: organisation]/[TO ADD: repository].git
-   cd [TO ADD: repository]
+   git clone https://github.com/control-protection-grids-tudelft/Robust_MPC.git
+   cd Robust_MPC
    ```
 
    Or use the green **Code → Download ZIP** button at the top of this page.
