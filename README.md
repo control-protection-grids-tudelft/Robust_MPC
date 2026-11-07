@@ -24,7 +24,7 @@ The solution is comprised of three main parts:
 
 ### 2. Build hyperbox containing uncertainty, state and input sets
 - Run `fineGrid2D()` function to generate a fine grid with a set of uncertain parameters.
-- Run `hyperboxVertices()` function to generate all vertices of the hyperbox given its extrem values.
+- Run `hyperboxVertices()` function to generate all vertices of the hyperbox given its extreme values.
 
 ### 3. Robust MPC Design via Controller Matching with Vertex Relaxation
 - Run `getRobustK()` function to compute a robust state feedback gain `K`, i.e., an unconstrained control law.
