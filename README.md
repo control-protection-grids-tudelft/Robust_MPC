@@ -85,6 +85,13 @@ run('examples/my_first_example.m')
 
 ## Funding
 
-This work is supported by the Horizon Europe project **PROSECCO** (Grant Agreement No. 101160687) and the **NWO Veni** project **SAFE-GRID** (Project No. 20248)
+<p>
+  <img src="docs/img/eu_funded.png" height="60" alt="Funded by the European Union">
+  &nbsp;&nbsp;
+  <img src="docs/img/prosecco_logo.png" height="60" alt="PROSECCO project">
+  &nbsp;&nbsp;
+  <img src="docs/img/nwo_logo.png" height="60" alt="NWO – Dutch Research Council">
+</p>
 
+This work is funded by the European Union under the Horizon Europe project **PROSECCO** (Grant Agreement No. 101160687) and by **NWO** through the Veni project **SAFE-GRID** (Project No. 20248). Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or CINEA. Neither the European Union nor the granting authority can be held responsible for them.
 
